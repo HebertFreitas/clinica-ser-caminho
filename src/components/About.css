@@ -1,0 +1,89 @@
+.about__inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about__text h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  margin: 18px 0 22px;
+}
+
+.about__text p {
+  color: var(--color-text-light);
+  margin-bottom: 18px;
+  font-size: 1.02rem;
+}
+
+.about__values {
+  display: grid;
+  gap: 22px;
+}
+
+.about__card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 30px 32px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  border: 1px solid var(--color-cream-dark);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.about__card-dot {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.about__card--pink .about__card-dot {
+  background: var(--color-pink-light);
+  border: 2px solid var(--color-pink);
+}
+
+.about__card--blue .about__card-dot {
+  background: var(--color-blue-light);
+  border: 2px solid var(--color-blue);
+}
+
+.about__card--green .about__card-dot {
+  background: var(--color-green-light);
+  border: 2px solid var(--color-green);
+}
+
+.about__card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.about__card--pink h3 {
+  color: var(--color-pink-dark);
+}
+
+.about__card--blue h3 {
+  color: var(--color-blue-dark);
+}
+
+.about__card--green h3 {
+  color: var(--color-green-dark);
+}
+
+.about__card p {
+  color: var(--color-text-light);
+  font-size: 0.96rem;
+}
+
+@media (max-width: 900px) {
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
