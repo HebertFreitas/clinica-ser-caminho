@@ -39,48 +39,57 @@ function Header() {
     activeSection === id ? 'is-active' : undefined
 
   return (
-    <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-      <div className="container header__inner">
-        <a href="#topo" className="header__brand" onClick={handleLinkClick}>
-          <img src={logo} alt="" className="header__logo-image" aria-hidden="true" />
-          <span className="header__logo-text">Ser Caminho</span>
-        </a>
+    <>
+      <header
+        className={`header ${isScrolled ? 'header--scrolled' : ''} ${isOpen ? 'header--menu-open' : ''}`}
+      >
+        <div className="container header__inner">
+          <a href="#topo" className="header__brand" onClick={handleLinkClick}>
+            <img src={logo} alt="" className="header__logo-image" aria-hidden="true" />
+            <span className="header__logo-text">Ser Caminho</span>
+          </a>
 
-        <nav className="header__nav" aria-label="Navegação principal">
-          <ul>
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={linkClassName(link.id)}
-                  aria-current={activeSection === link.id ? 'true' : undefined}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav className="header__nav" aria-label="Navegação principal">
+            <ul>
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={linkClassName(link.id)}
+                    aria-current={activeSection === link.id ? 'true' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <a href="#contato" className="btn btn-primary header__cta">
-          Agendar atendimento
-        </a>
+          <a href="#contato" className="btn btn-primary header__cta">
+            Agendar atendimento
+          </a>
 
-        <button
-          type="button"
-          className={`header__toggle ${isOpen ? 'is-open' : ''}`}
-          aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+          <button
+            type="button"
+            className={`header__toggle ${isOpen ? 'is-open' : ''}`}
+            aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
 
-      <div className={`header__mobile ${isOpen ? 'is-open' : ''}`} aria-hidden={!isOpen}>
-        <nav aria-label="Menu mobile">
+      <div
+        id="mobile-menu"
+        className={`header__menu ${isOpen ? 'is-open' : ''}`}
+        aria-hidden={!isOpen}
+      >
+        <nav className="header__menu-nav" aria-label="Menu mobile">
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
@@ -89,6 +98,7 @@ function Header() {
                   className={linkClassName(link.id)}
                   aria-current={activeSection === link.id ? 'true' : undefined}
                   onClick={handleLinkClick}
+                  tabIndex={isOpen ? 0 : -1}
                 >
                   {link.label}
                 </a>
@@ -96,11 +106,17 @@ function Header() {
             ))}
           </ul>
         </nav>
-        <a href="#contato" className="btn btn-primary" onClick={handleLinkClick}>
+
+        <a
+          href="#contato"
+          className="btn btn-primary header__menu-cta"
+          onClick={handleLinkClick}
+          tabIndex={isOpen ? 0 : -1}
+        >
           Agendar atendimento
         </a>
       </div>
-    </header>
+    </>
   )
 }
 
