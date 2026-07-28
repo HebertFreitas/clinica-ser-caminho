@@ -1,67 +1,77 @@
+.about {
+  background: var(--color-white);
+}
+
 .about__inner {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 64px;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(40px, 6vw, 72px);
   align-items: start;
 }
 
 .about__text h2 {
-  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
-  margin: 18px 0 22px;
+  font-size: clamp(1.85rem, 3vw, 2.45rem);
+  margin: 18px 0 24px;
 }
 
 .about__text p {
   color: var(--color-text-light);
   margin-bottom: 18px;
   font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.about__text p:last-child {
+  margin-bottom: 0;
 }
 
 .about__values {
   display: grid;
-  gap: 22px;
+  gap: 18px;
 }
 
 .about__card {
   background: var(--color-white);
   border-radius: var(--radius-md);
-  padding: 30px 32px;
+  padding: 28px 28px 28px 32px;
   box-shadow: var(--shadow-card);
   position: relative;
-  border: 1px solid var(--color-cream-dark);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(74, 74, 66, 0.07);
+  border-left: 3px solid transparent;
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s ease;
 }
 
 .about__card:hover {
-  transform: translateY(-4px);
+  transform: translateX(4px);
   box-shadow: var(--shadow-soft);
 }
 
-.about__card-dot {
-  display: inline-block;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  margin-bottom: 16px;
+.about__card--pink {
+  border-left-color: var(--color-pink);
 }
 
-.about__card--pink .about__card-dot {
-  background: var(--color-pink-light);
-  border: 2px solid var(--color-pink);
+.about__card--blue {
+  border-left-color: var(--color-blue);
 }
 
-.about__card--blue .about__card-dot {
-  background: var(--color-blue-light);
-  border: 2px solid var(--color-blue);
+.about__card--green {
+  border-left-color: var(--color-green);
 }
 
-.about__card--green .about__card-dot {
-  background: var(--color-green-light);
-  border: 2px solid var(--color-green);
+.about__card-index {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  opacity: 0.5;
+  margin-bottom: 10px;
 }
 
 .about__card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
 }
 
 .about__card--pink h3 {
@@ -78,7 +88,8 @@
 
 .about__card p {
   color: var(--color-text-light);
-  font-size: 0.96rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 @media (max-width: 900px) {

@@ -27,11 +27,13 @@ const STEPS = [
   },
 ]
 
+const DELAY_CLASS = [' reveal-delay-1', ' reveal-delay-2', ' reveal-delay-3', ' reveal-delay-4']
+
 function Approach() {
   return (
     <section id="abordagem" className="section approach">
       <div className="container">
-        <div className="section-heading center">
+        <div className="section-heading center reveal">
           <span className="section-tag">nossa abordagem</span>
           <h2>Como funciona o seu processo de atendimento</h2>
           <p>
@@ -40,16 +42,22 @@ function Approach() {
           </p>
         </div>
 
-        <div className="approach__steps">
+        <ol className="approach__timeline">
           {STEPS.map((step, index) => (
-            <div key={step.number} className="approach__step">
-              <div className="approach__number">{step.number}</div>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-              {index < STEPS.length - 1 && <span className="approach__connector" aria-hidden="true" />}
-            </div>
+            <li
+              key={step.number}
+              className={`approach__step reveal${DELAY_CLASS[index]}`}
+            >
+              <div className="approach__marker">
+                <span className="approach__number">{step.number}</span>
+              </div>
+              <div className="approach__content">
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

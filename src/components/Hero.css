@@ -1,98 +1,122 @@
 .hero {
   position: relative;
-  padding: 170px 0 110px;
+  padding: clamp(130px, 16vw, 170px) 0 clamp(72px, 10vw, 100px);
   overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 50% at 85% 20%, var(--color-pink-light) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 10% 80%, var(--color-blue-light) 0%, transparent 60%),
+    var(--color-cream);
 }
 
-.hero__blob {
+.hero__path {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(4px);
-  opacity: 0.55;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(55vw, 520px);
+  color: var(--color-green);
+  opacity: 0.7;
+  pointer-events: none;
   z-index: 0;
-}
-
-.hero__blob--pink {
-  width: 420px;
-  height: 420px;
-  background: var(--color-pink-light);
-  top: -160px;
-  right: -140px;
-}
-
-.hero__blob--blue {
-  width: 380px;
-  height: 380px;
-  background: var(--color-blue-light);
-  bottom: -180px;
-  left: -140px;
 }
 
 .hero__inner {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 60px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 6vw, 72px);
   align-items: center;
 }
 
 .hero__title {
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  margin: 22px 0 24px;
+  font-size: clamp(2.1rem, 4.2vw, 3.25rem);
+  margin: 20px 0 22px;
+  max-width: 14ch;
 }
 
-.hero__title span {
+.hero__title em {
   color: var(--color-pink-dark);
   font-style: italic;
+  font-weight: 600;
 }
 
 .hero__subtitle {
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   color: var(--color-text-light);
-  max-width: 520px;
-  margin-bottom: 36px;
+  max-width: 480px;
+  margin-bottom: 32px;
+  line-height: 1.75;
 }
 
 .hero__actions {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 52px;
+  margin-bottom: 44px;
 }
 
-.hero__stats {
+.hero__pillars {
   display: flex;
-  gap: 38px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
-.hero__stat {
+.hero__pillar {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding: 14px 20px;
+  background: rgba(255, 253, 249, 0.72);
+  border: 1px solid rgba(74, 74, 66, 0.08);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(6px);
+  min-width: 130px;
 }
 
-.hero__stat strong {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
+.hero__pillar-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--color-green-dark);
 }
 
-.hero__stat span {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
+.hero__pillar-value {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--color-text);
 }
 
 .hero__visual {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.hero__frame {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.hero__frame-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 155, 120, 0.25);
+  background:
+    radial-gradient(circle at 30% 25%, var(--color-pink-soft) 0%, transparent 50%),
+    radial-gradient(circle at 70% 75%, var(--color-blue-soft) 0%, transparent 45%),
+    rgba(255, 253, 249, 0.5);
+  box-shadow: var(--shadow-soft);
 }
 
 .hero__logo-image {
-  width: min(100%, 440px);
+  position: relative;
+  width: min(100%, 380px);
   height: auto;
   object-fit: contain;
 }
@@ -103,13 +127,17 @@
     text-align: center;
   }
 
+  .hero__title {
+    max-width: none;
+  }
+
   .hero__subtitle {
     margin-left: auto;
     margin-right: auto;
   }
 
   .hero__actions,
-  .hero__stats {
+  .hero__pillars {
     justify-content: center;
   }
 
@@ -117,26 +145,30 @@
     order: -1;
   }
 
-  .hero__logo-image {
-    width: min(100%, 340px);
+  .hero__path {
+    right: 50%;
+    top: 10%;
+    transform: translateX(50%);
+    width: 80vw;
+    opacity: 0.35;
   }
 }
 
 @media (max-width: 600px) {
-  .hero {
-    padding: 140px 0 70px;
-  }
-
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .hero__stats {
-    gap: 24px;
+  .hero__pillars {
+    flex-direction: column;
+  }
+
+  .hero__pillar {
+    min-width: auto;
   }
 
   .hero__logo-image {
-    width: min(100%, 260px);
+    width: min(100%, 240px);
   }
 }

@@ -5,11 +5,11 @@ function Location() {
   return (
     <section id="localizacao" className="section location">
       <div className="container location__inner">
-        <div className="location__map">
+        <div className="location__map reveal">
           <img src={mapa} alt="Mapa de localização da Clínica Ser Caminho" />
         </div>
 
-        <div className="location__info">
+        <div className="location__info reveal reveal-delay-2">
           <span className="section-tag">estamos aqui</span>
           <h2>Venha nos visitar</h2>
           <p className="location__lead">

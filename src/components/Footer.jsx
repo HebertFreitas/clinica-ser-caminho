@@ -1,4 +1,3 @@
-import TreeIcon from "./icons/TreeIcon";
 import "./Footer.css";
 
 function Footer() {
@@ -9,7 +8,6 @@ function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <div className="footer__logo">
-            <TreeIcon className="footer__logo-icon" />
             <span className="footer__logo-text">Ser Caminho</span>
           </div>
           <p>
@@ -43,7 +41,7 @@ function Footer() {
           <ul>
             <li>Av. Senador Levindo Coelho, 1923</li>
             <li>Vale do Jatobá, Belo Horizonte – MG</li>
-            <li>(31) 90000-0000</li>
+            <li>(31) 99119-5023</li>
             <li>contato@sercaminho.com.br</li>
           </ul>
         </div>
@@ -54,19 +52,11 @@ function Footer() {
             <li>
               <a
                 href="https://www.instagram.com/clinicsercaminho/"
+                target="_blank"
+                rel="noreferrer"
                 aria-label="Instagram"
               >
                 Instagram
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="Facebook">
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="#" aria-label="LinkedIn">
-                LinkedIn
               </a>
             </li>
           </ul>
@@ -78,7 +68,7 @@ function Footer() {
           <p>
             &copy; {year} Clínica Ser Caminho. Todos os direitos reservados.
           </p>
-          <p>CRP 00/00000</p>
+          <p>CRP 04/58350</p>
         </div>
       </div>
     </footer>

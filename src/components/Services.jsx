@@ -1,49 +1,58 @@
+import ServiceIcon from './icons/ServiceIcon'
 import './Services.css'
 
 const SERVICES = [
   {
     title: 'Psicologia',
+    icon: 'psychology',
     description:
       'Acompanhamento psicoterapêutico para crianças, adolescentes e adultos, com escuta acolhedora e cuidado com a saúde emocional.',
     color: 'blue',
   },
   {
     title: 'Avaliação Neuropsicológica',
+    icon: 'neuro',
     description:
       'Avaliação completa dos processos cognitivos, atencionais e emocionais, auxiliando no diagnóstico e no planejamento terapêutico.',
     color: 'pink',
   },
   {
     title: 'Psicopedagogia',
+    icon: 'psychopedagogy',
     description:
       'Intervenção especializada nas dificuldades de aprendizagem, fortalecendo o desenvolvimento escolar e a autonomia nos estudos.',
     color: 'green',
   },
   {
     title: 'Neuropsicopedagogia',
+    icon: 'neuropsycho',
     description:
       'Abordagem que integra neurociência e pedagogia para compreender e potencializar os processos de aprendizagem.',
     color: 'blue',
   },
   {
     title: 'Fonoaudiologia',
+    icon: 'speech',
     description:
       'Cuidado com a comunicação, linguagem, fala e voz, favorecendo o desenvolvimento e a qualidade de vida em cada fase.',
     color: 'pink',
   },
   {
     title: 'Nutrição',
+    icon: 'nutrition',
     description:
       'Orientação nutricional individualizada, com foco em saúde, bem-estar e uma relação equilibrada com a alimentação.',
     color: 'green',
   },
 ]
 
+const DELAY_CLASS = [' reveal-delay-1', ' reveal-delay-2', ' reveal-delay-3']
+
 function Services() {
   return (
     <section id="servicos" className="section services">
       <div className="container">
-        <div className="section-heading center">
+        <div className="section-heading center reveal">
           <span className="section-tag">nossos serviços</span>
           <h2>Cuidado especializado para cada momento da sua vida</h2>
           <p>
@@ -53,11 +62,17 @@ function Services() {
         </div>
 
         <div className="services__grid">
-          {SERVICES.map((service) => (
-            <div key={service.title} className={`services__card services__card--${service.color}`}>
+          {SERVICES.map((service, index) => (
+            <article
+              key={service.title}
+              className={`services__card services__card--${service.color} reveal${DELAY_CLASS[index % 3]}`}
+            >
+              <div className="services__icon-wrap">
+                <ServiceIcon name={service.icon} className="services__icon" />
+              </div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
