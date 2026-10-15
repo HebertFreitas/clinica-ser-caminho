@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ContactIcon from './icons/ContactIcon'
 import './Contact.css'
 
 const WHATSAPP_NUMBER = '5531975032248'
@@ -37,19 +38,29 @@ function Contact() {
 
           <div className="contact__details">
             <a
+              className="contact__link contact__link--whatsapp"
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noreferrer"
             >
-              (31) 97503-2248 · WhatsApp
+              <span className="contact__link-icon"><ContactIcon name="whatsapp" /></span>
+              <span className="contact__link-copy"><span>Converse pelo WhatsApp</span><strong>(31) 97503-2248</strong></span>
+              <ContactIcon name="arrow" className="contact__link-arrow" />
             </a>
-            <a href="mailto:contato@sercaminho.com.br">contato@sercaminho.com.br</a>
             <a
+              className="contact__link contact__link--instagram"
               href="https://www.instagram.com/clinicsercaminho/"
               target="_blank"
               rel="noreferrer"
             >
-              @clinicsercaminho · Instagram
+              <span className="contact__link-icon"><ContactIcon name="instagram" /></span>
+              <span className="contact__link-copy"><span>Acompanhe no Instagram</span><strong>@clinicsercaminho</strong></span>
+              <ContactIcon name="arrow" className="contact__link-arrow" />
+            </a>
+            <a className="contact__link contact__link--email" href="mailto:contato@sercaminho.com.br">
+              <span className="contact__link-icon"><ContactIcon name="mail" /></span>
+              <span className="contact__link-copy"><span>Envie um e-mail</span><strong>contato@sercaminho.com.br</strong></span>
+              <ContactIcon name="arrow" className="contact__link-arrow" />
             </a>
           </div>
         </div>
@@ -94,6 +105,7 @@ function Contact() {
           </div>
 
           <button type="submit" className="btn btn-outline-white contact__submit">
+            <ContactIcon name="whatsapp" width="21" height="21" />
             Enviar pelo WhatsApp
           </button>
         </form>

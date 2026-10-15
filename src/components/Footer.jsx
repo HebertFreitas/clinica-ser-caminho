@@ -1,4 +1,5 @@
 import "./Footer.css";
+import ContactIcon from './icons/ContactIcon';
 
 function Footer() {
   const year = new Date().getFullYear();
@@ -41,7 +42,7 @@ function Footer() {
           <ul>
             <li>Av. Senador Levindo Coelho, 1923</li>
             <li>Vale do Jatobá, Belo Horizonte – MG</li>
-            <li><a href="tel:+5531975032248">(31) 97503-2248</a></li>
+            <li><a className="footer__contact-link" href="https://wa.me/5531975032248" target="_blank" rel="noreferrer"><ContactIcon name="whatsapp" width="19" height="19" />(31) 97503-2248</a></li>
             <li>contato@sercaminho.com.br</li>
           </ul>
         </div>
@@ -51,12 +52,14 @@ function Footer() {
           <ul className="footer__social">
             <li>
               <a
+                className="footer__instagram"
                 href="https://www.instagram.com/clinicsercaminho/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Instagram"
+                aria-label="Instagram da clínica: @clinicsercaminho"
               >
-                @clinicsercaminho
+                <ContactIcon name="instagram" />
+                <span><strong>Instagram</strong><span>@clinicsercaminho</span></span>
               </a>
             </li>
           </ul>
