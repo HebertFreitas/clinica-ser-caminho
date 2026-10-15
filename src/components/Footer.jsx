@@ -41,7 +41,7 @@ function Footer() {
           <ul>
             <li>Av. Senador Levindo Coelho, 1923</li>
             <li>Vale do Jatobá, Belo Horizonte – MG</li>
-            <li>(31) 99119-5023</li>
+            <li><a href="tel:+5531975032248">(31) 97503-2248</a></li>
             <li>contato@sercaminho.com.br</li>
           </ul>
         </div>
@@ -56,7 +56,7 @@ function Footer() {
                 rel="noreferrer"
                 aria-label="Instagram"
               >
-                Instagram
+                @clinicsercaminho
               </a>
             </li>
           </ul>

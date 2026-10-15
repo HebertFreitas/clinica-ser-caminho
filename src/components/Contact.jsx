@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Contact.css'
 
-const WHATSAPP_NUMBER = '5531991195023'
+const WHATSAPP_NUMBER = '5531975032248'
 
 function Contact() {
   const [form, setForm] = useState({ name: '', phone: '', message: '' })
@@ -41,9 +41,16 @@ function Contact() {
               target="_blank"
               rel="noreferrer"
             >
-              (31) 99119-5023 · WhatsApp
+              (31) 97503-2248 · WhatsApp
             </a>
             <a href="mailto:contato@sercaminho.com.br">contato@sercaminho.com.br</a>
+            <a
+              href="https://www.instagram.com/clinicsercaminho/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              @clinicsercaminho · Instagram
+            </a>
           </div>
         </div>
 
