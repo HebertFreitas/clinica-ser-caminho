@@ -1,5 +1,6 @@
 function SectionDivider({ from = 'cream', to = 'white', flip = false }) {
   const colors = {
+    hero: '#ede5de',
     cream: '#f8f3ea',
     white: '#fffdf9',
     green: '#f1f4ea',
@@ -10,7 +11,7 @@ function SectionDivider({ from = 'cream', to = 'white', flip = false }) {
   const fillTo = colors[to] ?? colors.white
 
   return (
-    <div className={`section-divider${flip ? ' section-divider--flip' : ''}`} aria-hidden="true">
+    <div className={`section-divider reveal${flip ? ' section-divider--flip' : ''}`} aria-hidden="true">
       <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z"

@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="container footer__inner">
-        <div className="footer__brand">
+        <div className="footer__brand reveal">
           <div className="footer__logo">
             <span className="footer__logo-text">Ser Caminho</span>
           </div>
@@ -18,7 +18,7 @@ function Footer() {
           </p>
         </div>
 
-        <div className="footer__col">
+        <div className="footer__col reveal reveal-delay-1">
           <h4>Navegação</h4>
           <ul>
             <li>
@@ -31,12 +31,12 @@ function Footer() {
               <a href="#abordagem">Abordagem</a>
             </li>
             <li>
-              <a href="#depoimentos">Depoimentos</a>
+              <a href="#localizacao">Localização</a>
             </li>
           </ul>
         </div>
 
-        <div className="footer__col">
+        <div className="footer__col reveal reveal-delay-2">
           <h4>Contato</h4>
           <ul>
             <li>Av. Senador Levindo Coelho, 1923</li>
@@ -46,7 +46,7 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="footer__col">
+        <div className="footer__col reveal reveal-delay-3">
           <h4>Redes sociais</h4>
           <ul className="footer__social">
             <li>

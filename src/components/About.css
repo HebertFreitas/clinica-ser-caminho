@@ -9,6 +9,25 @@
   align-items: start;
 }
 
+.about__text > .reveal {
+  --reveal-x: -28px;
+  --reveal-y: 28px;
+}
+
+.about__card.reveal {
+  --reveal-x: 64px;
+  --reveal-y: 32px;
+  --reveal-scale: .96;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about .reveal--pending {
+    transition-duration: .9s, 1.15s, 1.15s, .3s, .3s;
+    transition-delay:
+      var(--about-delay, 0s), var(--about-delay, 0s), var(--about-delay, 0s), 0s, 0s;
+  }
+}
+
 .about__text h2 {
   font-size: clamp(1.85rem, 3vw, 2.45rem);
   margin: 18px 0 24px;
@@ -96,5 +115,16 @@
   .about__inner {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .about__text > .reveal {
+    --reveal-x: 0px;
+    --reveal-y: 32px;
+  }
+
+  .about__card.reveal {
+    --reveal-x: 0px;
+    --reveal-y: 44px;
+    --reveal-scale: .97;
   }
 }

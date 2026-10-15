@@ -21,23 +21,23 @@ const VALUES = [
   },
 ]
 
-const DELAY_CLASS = ['', ' reveal-delay-1', ' reveal-delay-2', ' reveal-delay-3']
-
 function About() {
   return (
     <section id="sobre" className="section about">
       <div className="container about__inner">
-        <div className="about__text reveal">
-          <span className="section-tag">sobre a clínica</span>
-          <h2>Um caminho de escuta, ética e cuidado integrado</h2>
-          <p>
+        <div className="about__text">
+          <span className="section-tag reveal" data-reveal-threshold="0.22">sobre a clínica</span>
+          <h2 className="reveal" data-reveal-threshold="0.22" style={{ '--about-delay': '.12s' }}>
+            Um caminho de escuta, ética e cuidado integrado
+          </h2>
+          <p className="reveal" data-reveal-threshold="0.22" style={{ '--about-delay': '.24s' }}>
             A Clínica Ser Caminho é um espaço multidisciplinar dedicado ao
             desenvolvimento humano em suas diferentes dimensões. Reunimos
             profissionais de Psicologia, Avaliação Neuropsicológica,
             Psicopedagogia, Neuropsicopedagogia, Fonoaudiologia e Nutrição
             para oferecer um cuidado verdadeiramente integrado.
           </p>
-          <p>
+          <p className="reveal" data-reveal-threshold="0.22" style={{ '--about-delay': '.36s' }}>
             Acreditamos que cada pessoa tem sua própria jornada, e nosso papel
             é caminhar ao lado dela combinando ciência, ética e sensibilidade —
             respeitando a individualidade de cada história em um ambiente
@@ -49,7 +49,9 @@ function About() {
           {VALUES.map((value, index) => (
             <div
               key={value.title}
-              className={`about__card about__card--${value.color} reveal${DELAY_CLASS[index + 1]}`}
+              className={`about__card about__card--${value.color} reveal`}
+              data-reveal-threshold="0.18"
+              style={{ '--about-delay': `${.12 + index * .18}s` }}
             >
               <span className="about__card-index" aria-hidden="true">
                 {String(index + 1).padStart(2, '0')}

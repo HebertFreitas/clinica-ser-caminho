@@ -1,70 +1,209 @@
-import logo from '../assets/logo-ser-caminho-transparente.png'
+import { useEffect, useRef, useState } from 'react'
+import portraitUrl from '../assets/hero-foto-enviada.png'
 import './Hero.css'
 
-function Hero() {
+const TRANSPARENT_MASK = 'linear-gradient(transparent, transparent)'
+
+function HeroTitle(props) {
   return (
-    <section id="topo" className="hero">
-      <div className="hero__path" aria-hidden="true">
-        <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M300 560 C300 420 180 380 120 280 C60 180 140 80 300 60 C460 80 540 180 480 280 C420 380 300 420 300 560"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            opacity="0.35"
-          />
-          <path
-            d="M300 520 C240 460 160 420 140 320 C120 220 200 140 300 120 C400 140 480 220 460 320 C440 420 360 460 300 520"
-            stroke="currentColor"
-            strokeWidth="1"
-            opacity="0.2"
-          />
-        </svg>
+    <h1 className="hero__title" {...props}>
+      Um espaço de escuta.
+      <br />
+      <span>Um caminho de cuidado.</span>
+    </h1>
+  )
+}
+
+function Hero() {
+  const heroRef = useRef(null)
+  const titleRef = useRef(null)
+  const [jsReady, setJsReady] = useState(false)
+  const [isReady, setIsReady] = useState(false)
+  const [cloneVisible, setCloneVisible] = useState(false)
+  const cloneVisibleRef = useRef(false)
+
+  useEffect(() => {
+    cloneVisibleRef.current = cloneVisible
+  }, [cloneVisible])
+
+  useEffect(() => {
+    const hero = heroRef.current
+    const title = titleRef.current
+    if (!hero || !title) return undefined
+
+    setJsReady(true)
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const finePointer = window.matchMedia('(pointer: fine)')
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const target = { x: 0, y: 0 }
+    const current = { x: 0, y: 0 }
+    let rect = title.getBoundingClientRect()
+    let frame = 0
+    let pointerActive = false
+    let touchY = null
+
+    const setMask = (value) => {
+      title.style.webkitMaskImage = value
+      title.style.maskImage = value
+      title.style.webkitMaskSize = '100% 100%'
+      title.style.maskSize = '100% 100%'
+    }
+
+    const sizeCanvas = () => {
+      rect = title.getBoundingClientRect()
+      canvas.width = Math.max(1, Math.round(rect.width))
+      canvas.height = Math.max(1, Math.round(rect.height))
+    }
+
+    const clearMask = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      setMask(TRANSPARENT_MASK)
+    }
+
+    const draw = () => {
+      const radius = Math.max(190, Math.min(260, rect.width * 0.25))
+      const x = current.x - rect.left
+      const y = current.y - rect.top
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius)
+      gradient.addColorStop(0, 'rgba(0,0,0,1)')
+      gradient.addColorStop(0.4, 'rgba(0,0,0,1)')
+      gradient.addColorStop(0.6, 'rgba(0,0,0,.75)')
+      gradient.addColorStop(0.75, 'rgba(0,0,0,.4)')
+      gradient.addColorStop(0.88, 'rgba(0,0,0,.12)')
+      gradient.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx.fillStyle = gradient
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      setMask(`url(${canvas.toDataURL('image/png')})`)
+    }
+
+    const tick = () => {
+      const ease = reducedMotion.matches ? 1 : 0.18
+      current.x += (target.x - current.x) * ease
+      current.y += (target.y - current.y) * ease
+      draw()
+      const settled = Math.abs(target.x - current.x) <= 0.5 && Math.abs(target.y - current.y) <= 0.5
+      frame = settled ? 0 : requestAnimationFrame(tick)
+    }
+
+    const onPointer = (event) => {
+      if (event.pointerType !== 'mouse' || !finePointer.matches || cloneVisibleRef.current) return
+      rect = title.getBoundingClientRect()
+      if (!pointerActive) {
+        pointerActive = true
+        current.x = event.clientX
+        current.y = event.clientY
+      }
+      target.x = event.clientX
+      target.y = event.clientY
+      if (!frame) frame = requestAnimationFrame(tick)
+    }
+
+    const onLeave = () => {
+      pointerActive = false
+      cancelAnimationFrame(frame)
+      frame = 0
+      clearMask()
+    }
+
+    const onWheel = (event) => {
+      if (event.deltaY > 0) setCloneVisible(true)
+      else if (event.deltaY < 0) setCloneVisible(false)
+    }
+
+    const onTouchStart = (event) => {
+      touchY = event.touches[0].clientY
+    }
+
+    const onTouchMove = (event) => {
+      if (touchY === null) return
+      const y = event.touches[0].clientY
+      const delta = touchY - y
+      if (delta > 10) setCloneVisible(true)
+      else if (delta < -10) setCloneVisible(false)
+      touchY = y
+    }
+
+    const onTouchEnd = () => {
+      touchY = null
+    }
+
+    const onKeyDown = (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) setCloneVisible(true)
+      else if (['ArrowUp', 'PageUp'].includes(event.key)) setCloneVisible(false)
+    }
+
+    const onResize = () => {
+      sizeCanvas()
+      if (!pointerActive) clearMask()
+    }
+
+    const onPageHide = () => {
+      cancelAnimationFrame(frame)
+      frame = 0
+    }
+
+    hero.addEventListener('pointerenter', onPointer)
+    hero.addEventListener('pointermove', onPointer)
+    hero.addEventListener('pointerleave', onLeave)
+    window.addEventListener('wheel', onWheel, { passive: true })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: true })
+    window.addEventListener('touchend', onTouchEnd, { passive: true })
+    window.addEventListener('keydown', onKeyDown)
+    window.addEventListener('resize', onResize)
+    window.addEventListener('pagehide', onPageHide)
+
+    sizeCanvas()
+    clearMask()
+    document.fonts?.ready.then(sizeCanvas)
+    const readyFrame = requestAnimationFrame(() => setIsReady(true))
+
+    return () => {
+      cancelAnimationFrame(frame)
+      cancelAnimationFrame(readyFrame)
+      hero.removeEventListener('pointerenter', onPointer)
+      hero.removeEventListener('pointermove', onPointer)
+      hero.removeEventListener('pointerleave', onLeave)
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('touchend', onTouchEnd)
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('resize', onResize)
+      window.removeEventListener('pagehide', onPageHide)
+    }
+  }, [])
+
+  const classes = ['hero', jsReady && 'hero--js', isReady && 'is-ready'].filter(Boolean).join(' ')
+
+  return (
+    <section id="topo" ref={heroRef} className={classes} aria-labelledby="hero-title" tabIndex={0}>
+      <div className="hero__content">
+        <p className="hero__eyebrow">Psicologia • Escuta • Acolhimento</p>
+        <span className="hero__signature" aria-hidden="true">
+          PSICOLOGIA
+        </span>
+        <HeroTitle id="hero-title" ref={titleRef} />
+        <HeroTitle
+          aria-hidden="true"
+          className={`hero__title hero__title--clone${cloneVisible ? ' is-visible' : ''}`}
+        />
       </div>
 
-      <div className="container hero__inner">
-        <div className="hero__content reveal">
-          <span className="section-tag">cuidado multidisciplinar</span>
-          <h1 className="hero__title">
-            Cuidar de cada etapa do seu desenvolvimento é o primeiro passo para{' '}
-            <em>ser caminho</em> até você mesmo.
-          </h1>
-          <p className="hero__subtitle">
-            Na Clínica Ser Caminho, reunimos Psicologia, Avaliação Neuropsicológica,
-            Psicopedagogia, Neuropsicopedagogia, Fonoaudiologia e Nutrição em um único espaço
-            de cuidado. Um atendimento integrado, humano e ético para você e sua família.
-          </p>
+      <img
+        className="hero__portrait"
+        src={portraitUrl}
+        alt="Profissional de psicologia sentada em uma poltrona, sorrindo em uma postura acolhedora"
+        width="1952"
+        height="1273"
+        fetchPriority="high"
+      />
 
-          <div className="hero__actions">
-            <a href="#contato" className="btn btn-primary">
-              Agende seu atendimento
-            </a>
-            <a href="#sobre" className="btn btn-secondary">
-              Conheça a clínica
-            </a>
-          </div>
-
-          <ul className="hero__pillars" aria-label="Diferenciais da clínica">
-            <li className="hero__pillar reveal reveal-delay-1">
-              <span className="hero__pillar-label">Equipe</span>
-              <span className="hero__pillar-value">multidisciplinar</span>
-            </li>
-            <li className="hero__pillar reveal reveal-delay-2">
-              <span className="hero__pillar-label">Atendimento</span>
-              <span className="hero__pillar-value">humanizado</span>
-            </li>
-            <li className="hero__pillar reveal reveal-delay-3">
-              <span className="hero__pillar-label">Compromisso</span>
-              <span className="hero__pillar-value">ética e sigilo</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="hero__visual reveal reveal-delay-2">
-          <div className="hero__frame">
-            <div className="hero__frame-ring" aria-hidden="true" />
-            <img src={logo} alt="Logo da Clínica Ser Caminho" className="hero__logo-image" />
-          </div>
-        </div>
+      <div className="hero__credits">
+        <span>Dra Débora Emily</span>
+        <span>Psicologia e acolhimento</span>
       </div>
     </section>
   )
