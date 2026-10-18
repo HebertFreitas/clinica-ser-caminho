@@ -183,7 +183,7 @@ function Hero() {
       <div className="hero__content">
         <p className="hero__eyebrow">Psicologia • Escuta • Acolhimento</p>
         <span className="hero__signature" aria-hidden="true">
-          PSICOLOGIA
+          SER CAMINHO
         </span>
         <HeroTitle id="hero-title" ref={titleRef} />
         <HeroTitle
@@ -202,8 +202,8 @@ function Hero() {
       />
 
       <div className="hero__credits">
-        <span>Dra Débora Emily</span>
-        <span>Psicologia e acolhimento</span>
+        <span>Débora Emily, fundadora e psicóloga </span>
+        <span>Psicologia e desenvolvimento</span>
       </div>
     </section>
   )
